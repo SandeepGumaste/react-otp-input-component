@@ -9,12 +9,12 @@ export default [
   {
     input: "./src/index.ts",
     output: [
-      { file: "dist/index.js", format: "cjs" },
       {
-        file: "dist/index.es.js",
-        format: "'es",
+        file: "./dist/index.es.js",
+        format: "es",
         exports: "named",
       },
+      { file: "./dist/index.js", format: "cjs" },
     ],
     plugins: [
       postcss({
@@ -26,13 +26,9 @@ export default [
         presets: ["@babel/preset-react"],
       }),
       typescript({ tsconfig: "./tsconfig.json" }),
+      dts(),
       external(),
       resolve(),
     ],
-  },
-  {
-    input: "dist/esm/index.d.ts",
-    output: [{ file: "dist/index.d.ts", format: "esm" }],
-    plugins: [dts()],
   },
 ];
